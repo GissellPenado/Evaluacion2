@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tuempresa.evaluacion2.PaginaPrincipalController"
+            prefHeight="400.0"
+            prefWidth="600.0">
+
+    <VBox prefHeight="400.0"
+          prefWidth="600.0">
+
+        <!-- MENU BAR -->
+        <MenuBar>
+
+            <Menu text="Clientes">
+
+                <MenuItem text="Registrar"
+                          onAction="#registrar"/>
+
+                <MenuItem text="Consultar"
+                          onAction="#consultar"/>
+
+            </Menu>
+
+            <Menu text="Sistema">
+
+                <MenuItem text="Salir"
+                          onAction="#salir"/>
+
+            </Menu>
+
+        </MenuBar>
+
+
+        <!-- TOOL BAR -->
+        <ToolBar>
+
+            <Button text="Registrar"
+                    onAction="#registrar"/>
+
+            <Button text="Consultar"
+                    onAction="#consultar"/>
+
+            <Separator/>
+
+            <Button text="Salir"
+                    onAction="#salir"/>
+
+        </ToolBar>
+
+
+        <!-- CONTENIDO -->
+        <StackPane VBox.vgrow="ALWAYS">
+
+            <Label text="VENTANA PRINCIPAL"
+                   style="-fx-font-size: 24px;">
+
+                <contextMenu>
+
+                    <ContextMenu>
+
+                        <MenuItem text="Actualizar"
+                                  onAction="#actualizar"/>
+
+                    </ContextMenu>
+
+                </contextMenu>
+
+            </Label>
+
+        </StackPane>
+
+    </VBox>
+
+</AnchorPane>
