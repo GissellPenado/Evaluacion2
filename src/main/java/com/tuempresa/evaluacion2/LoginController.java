@@ -1,12 +1,11 @@
 package com.tuempresa.evaluacion2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 
 public class LoginController {
 
@@ -40,43 +39,64 @@ public class LoginController {
     }
 
     private void validarLogin() {
-        String usuario = txtUsuario.getText();
-        String password = txtPassword.getText();
+        String usuario = txtUsuario.getText().trim();
+        String password = txtPassword.getText().trim();
 
-        if (usuario.isEmpty() || password.isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Campos vacíos");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Debe ingresar usuario y contraseña.");
-            alerta.showAndWait();
-        } else {
-            if (usuario.equals("admin") && password.equals("1234")) {
-                abrirVentanaPrincipal();
-            } else {
-                Alert alerta = new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("Error de acceso");
-                alerta.setHeaderText(null);
-                alerta.setContentText("Usuario o contraseña incorrectos.");
-                alerta.showAndWait();
-            }
+        // 1. Alerta si AMBOS campos están vacíos
+        if (usuario.isEmpty() && password.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos", "Debe ingresar el usuario y la contraseña.");
+            txtUsuario.requestFocus();
+            return;
         }
+
+        // 2. Alerta si falta SOLO el usuario
+        if (usuario.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Usuario requerido", "Por favor, ingrese su nombre de usuario.");
+            txtUsuario.requestFocus();
+            return;
+        }
+
+        // 3. Alerta si falta SOLO la contraseña
+        if (password.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Contraseña requerida", "Por favor, ingrese su contraseña.");
+            txtPassword.requestFocus();
+            return;
+        }
+
+        // 4. Validar credenciales correctas
+        if (usuario.equals("admin") && password.equals("1234")) {
+            abrirVentanaPrincipal();
+        } else {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de acceso", "Usuario o contraseña incorrectos.");
+        }
+    }
+
+    // Método auxiliar reutilizable para lanzar alertas sencillas
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
     private void abrirVentanaPrincipal() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tuempresa/fxml/principal.fxml"));
+            // Asegúrate de que la ruta del FXML coincida con la estructura de tus resources
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pagina_principal.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");
             stage.setScene(scene);
             stage.show();
 
-
+            // Cerrar la ventana de login actual
             Stage ventanaLogin = (Stage) btnLogin.getScene().getWindow();
             ventanaLogin.close();
 
         } catch (Exception e) {
             e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de carga", "No se pudo abrir la ventana principal.");
         }
     }
 
@@ -85,10 +105,9 @@ public class LoginController {
         confirmacion.setTitle("Salir");
         confirmacion.setHeaderText(null);
         confirmacion.setContentText("¿Desea cerrar la aplicación?");
-        if (confirmacion.showAndWait().get() == ButtonType.OK) {
+        if (confirmacion.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             Stage ventana = (Stage) btnSalir.getScene().getWindow();
             ventana.close();
         }
     }
 }
-
