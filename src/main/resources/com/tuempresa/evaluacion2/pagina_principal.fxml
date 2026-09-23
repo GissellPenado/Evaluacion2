@@ -34,7 +34,6 @@
 
         </MenuBar>
 
-
         <!-- TOOL BAR -->
         <ToolBar>
 
@@ -51,25 +50,11 @@
 
         </ToolBar>
 
-
         <!-- CONTENIDO -->
-        <StackPane VBox.vgrow="ALWAYS">
+        <StackPane fx:id="stackPane" VBox.vgrow="ALWAYS">
 
             <Label text="VENTANA PRINCIPAL"
-                   style="-fx-font-size: 24px;">
-
-                <contextMenu>
-
-                    <ContextMenu>
-
-                        <MenuItem text="Actualizar"
-                                  onAction="#actualizar"/>
-
-                    </ContextMenu>
-
-                </contextMenu>
-
-            </Label>
+                   style="-fx-font-size: 24px;"/>
 
         </StackPane>
 

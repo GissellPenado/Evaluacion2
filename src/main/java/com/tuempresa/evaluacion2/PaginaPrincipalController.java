@@ -3,8 +3,25 @@ package com.tuempresa.evaluacion2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.StackPane;
 
 public class PaginaPrincipalController {
+
+    @FXML
+    private StackPane stackPane;
+
+    @FXML
+    public void initialize() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem itemActualizar = new MenuItem("Actualizar");
+        itemActualizar.setOnAction(this::actualizar);
+        contextMenu.getItems().add(itemActualizar);
+
+        stackPane.setOnContextMenuRequested(event ->
+                contextMenu.show(stackPane, event.getScreenX(), event.getScreenY()));
+    }
 
     @FXML
     private void registrar(ActionEvent event) {
