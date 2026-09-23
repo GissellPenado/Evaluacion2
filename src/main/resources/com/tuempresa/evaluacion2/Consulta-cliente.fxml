@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConsultaClientesController">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuempresa.evaluacion2.ConsultaClientesController">
     <children>
         <VBox spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
             <children>
@@ -15,10 +15,10 @@
                     </font>
                 </Label>
 
-                <!-- Tabla de Clientes con evento On Mouse Clicked -->
-                <TableView fx:id="tablaClientes" onMouseClicked="#onTablaClicked" VBox.vgrow="ALWAYS">
+                <!-- Tabla de Clientes -->
+                <TableView fx:id="tablaClientes" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colNombre" prefWidth="155.9999942779541" text="Nombre completo" />
+                        <TableColumn fx:id="colNombre" prefWidth="155.0" text="Nombre completo" />
                         <TableColumn fx:id="colTipoCliente" prefWidth="132.0" text="Tipo de cliente" />
                         <TableColumn fx:id="colCiudad" prefWidth="120.0" text="Ciudad" />
                         <TableColumn fx:id="colFechaNac" prefWidth="130.0" text="Fecha de nacimiento" />
@@ -32,8 +32,8 @@
                 <!-- Botones inferiores -->
                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                     <children>
-                        <Button mnemonicParsing="false" text="Ver / Editar Detalle" />
-                        <Button mnemonicParsing="false" text="Cerrar" />
+                        <Button mnemonicParsing="false" onAction="#onVerDetalleAction" text="Ver / Editar Detalle" />
+                        <Button mnemonicParsing="false" onAction="#onCerrarAction" text="Cerrar" />
                     </children>
                 </HBox>
             </children>
